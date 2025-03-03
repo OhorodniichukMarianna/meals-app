@@ -14,7 +14,7 @@ const App = () => {
   return (
     <Provider store={store}>
       <QueryClientProvider client={queryClient}>
-        <Router>
+        <Router basename="/meals-app">
           <Routes>
             <Route path="/" element={<MealsPage />} />
             <Route path="/favourites" element={<FavouritesPage />} />
