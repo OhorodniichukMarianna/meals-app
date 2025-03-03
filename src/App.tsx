@@ -1,26 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import About from './pages/MealsPage';
+import MealPage from './pages/MealPage';
+import FavouritesPage from './pages/FavouritesPage';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import store from "./stores/store";
+import { Provider } from "react-redux";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import MealsPage from './pages/MealsPage';
 
-function App() {
+const queryClient = new QueryClient();
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <QueryClientProvider client={queryClient}>
+        <Router>
+          <Routes>
+            <Route path="/" element={<MealsPage />} />
+            <Route path="/favourites" element={<FavouritesPage />} />
+            <Route path='/meal/:id' element={<MealPage />} />
+          </Routes>
+        </Router>
+      </QueryClientProvider>
+    </Provider>
   );
-}
+};
 
 export default App;
